@@ -3,7 +3,7 @@
 var http        = require('http'),
     express     = require('express'),
     passport    = require('passport'),
-    debug       = require('debug')('drekcast:server'),
+    debug       = require('debug')('eventcast:server'),
 
     Primus      = require('primus'),
     PrimusRooms = require('primus-rooms'),
@@ -23,6 +23,7 @@ app.configure(function() {
     app.set('port', process.env.PORT || 3000);
     app.use(express.logger('dev'));
     app.use(express.bodyParser());
+    app.use(express.static('public'))
     app.use(passport.initialize());
     app.use(express.methodOverride());
     app.use(app.router);
@@ -34,7 +35,7 @@ app.configure('development', function () {
 
 app.use(function (req, res, next) {
     app.disable( 'x-powered-by' );
-    res.header("X-Powered-By", "DrekCast");
+    res.header("X-Powered-By", "EventCast");
     next()
 })
 
