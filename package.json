@@ -1,0 +1,29 @@
+{
+  "name": "DrekCast",
+  "version": "0.3.0",
+  "engines": {
+    "node": "*",
+    "npm": "*"
+  },
+  "dependencies": {
+    "supervisor": "0.4.x",
+    "express": "~ 3.4.0",
+    "debug": "*",
+    "passport": "*",
+    "passport-local": "*",
+    "passport-http": "*",
+    "passport-hawk": "*",
+    "lodash": "~2.4.1",
+    "primus": "~2.0.4",
+    "primus-rooms": "~3.0.1",
+    "ws": "~0.4.31"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "should": ">= 0.0.1"
+  },
+  "scripts": {
+    "start": "node_modules/.bin/supervisor server",
+    "test": "node_modules/.bin/mocha -w"
+  }
+}

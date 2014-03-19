@@ -1,0 +1,36 @@
+[{
+    "name": "DrekCast Test Channel",
+    "token": "drekcast-test",
+
+    "users": [ "admin" ],
+
+    "screens": {
+        "clock": {},
+        "message": {
+            "providers": ["twitter"]
+        },
+        "webcam": {}
+    },
+    "defaultScreen": "click",
+
+    "overlays": {
+        "message": {
+            "_visible": false,
+            "providers": [ "twitter", "facebook" ]
+        },
+        "logo": {
+            "_visible": true
+        }
+    },
+
+    "dataProviders": {
+        "twitter": {
+            "_type": "TwitterDataProvider",
+            "query": "Test"
+        },
+        "facebook": {
+            "_type": "FacebookDataProvider",
+            "query": "Test"
+        }
+    }
+}]

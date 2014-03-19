@@ -1,0 +1,13 @@
+[{
+    "username": "admin",
+    "password": "test",
+    "api_secret": "abcdefghij"
+},{
+    "username": "client1",
+    "password": "test",
+    "api_secret": "abcdefghis"
+},{
+    "username": "client2",
+    "password": "test",
+    "api_secret": "abcdefghis"
+}]
