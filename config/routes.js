@@ -19,4 +19,14 @@ module.exports = function(app, passport){
 
             });
         });
+    app.get('/channels/:token',
+        authentication,
+        function(req, res) {
+
+            channelRepository.get(req.params.token, function(channel) {
+
+                res.send(channel.toClientJSON());
+
+            });
+        });
 }

@@ -62,12 +62,46 @@ require('./config/routes')(app, passport);
 
 var server = http.createServer(app);
 var primus = new Primus(server, { });
-primus.use('rooms', PrimusRooms);
 
 primus.on('connection', function(spark) {
-    console.log('connection has the following headers', spark.headers);
-    console.log('connection was made from', spark.address);
-    console.log('connection id', spark.id);
+    //console.log('connection has the following headers', spark.headers);
+    //console.log('connection was made from', spark.address);
+    //console.log('connection id', spark.id);
+
+    primus.write(['client:join', { id: spark.id, address: spark.address, query: spark.query }]);
+
+    spark.on('data', function(data) {
+        data = data || {};
+        var action = data.action;
+        switch(action) {
+
+            case 'join':
+                var channelName = data.channel;
+                var channel = channels.get(channelName, function(channel) {
+                    spark.channel = channel;
+                    channel.join(spark);
+                });
+                break;
+
+            case 'leave':
+                if (spark.channel) {
+                    spark.channel.leave(spark);
+                }
+                break;
+
+            case 'setScreen':
+
+                if (spark.channel) {
+                    spark.channel.setScreen(data.screen, data.options || {});
+                }
+                break;
+
+            case 'toggleOverlay':
+                if (spark.channel) {
+                    spark.channel.toggleOverlay(data.overlay, data.visible, data.options || {});
+                }
+        }
+    })
 
 
 });
